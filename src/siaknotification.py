@@ -14,6 +14,7 @@ load_dotenv()
 
 def siak_notify():
     options = Options()
+    options.headless = True
     driver = webdriver.Firefox(options=options)
     login_url = "https://academic.ui.ac.id/main/Authentication/"
     homepage_url = "https://academic.ui.ac.id/main/Welcome/"
@@ -128,8 +129,10 @@ def siak_notify():
             scrape_not_done = False
         except Exception as e:
             error = True
-            asyncio.run(send_discord("Error happened"))
+            asyncio.run(send_webhook("Error happened"))
             break
+    print("Masuk sini pasti kan")
+    driver.close()
 
 if __name__ == "__main__":
     siak_notify()
